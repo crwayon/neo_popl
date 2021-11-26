@@ -1,0 +1,65 @@
+#include<stdio.h>
+
+int main()
+{
+    int a,b,c,r;
+    scanf("%d %d %d",&a,&b,&c);
+    r=a>b>c?a:b:c;
+    printf("%d",r);
+    return 0;
+    
+}
+
+
+------------------------------------------
+
+#define F_CPU 16000000L
+
+#include <avr/io.h>
+#include <util/delay.h>
+#include <string.h>
+#include <stdio.h>
+#include "UART1.h"
+
+FILE OUTPUT \
+=FDEV_SETUP_STREAM(UART1_transmit, NULL, _FDEV_SETUP_WRITE);
+
+FILE INPUT\
+=FDEV_SETUP_STREAM(NULL,UART1_receive, _FDEV_SETUP_READ);
+
+
+int main(void)
+{
+	uint8_t counter = 100;
+	char buffer[20]="";
+	stdout = &OUTPUT;
+	stdin = &INPUT;
+	
+	uart1_init();
+	
+	printf("Current Counter Value : ");
+	printf("%d\r\n", counter);
+	
+    while (1) 
+    {
+		scanf("%s",buffer);
+		
+		if(strcasecmp(buffer, "DOWN")==0){
+			counter--;
+			printf("current counter value : ");
+			printf("%d\r\n",counter);
+		}
+		
+		else if{strcasecmp(buffer, "UP")==0){
+			counter++;
+			printf("current counter value : ");
+			printf("%d\r\n",counter);
+		}
+		else{
+			printf("** Unknown Command **\r\n");
+		}
+	}
+	return 0;
+}
+
+305호학생?
